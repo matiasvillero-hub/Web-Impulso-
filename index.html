@@ -1,139 +1,488 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Web Impulso</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Impulso — Páginas web para pequeñas empresas</title>
+  <meta name="description" content="Creamos páginas web profesionales para pequeñas empresas y negocios emergentes. Rápidas, bonitas y que venden." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      background: #FAFAF8;
+      color: #1a1a18;
+      overflow-x: hidden;
+    }
+    :root {
+      --green: #1D9E75;
+      --green-dark: #0F6E56;
+      --green-light: #E1F5EE;
+      --green-mid: #9FE1CB;
+      --black: #1a1a18;
+      --gray: #5F5E5A;
+      --gray-light: #F1EFE8;
+      --border: rgba(30,30,24,0.10);
+      --white: #FFFFFF;
+      --amber: #EF9F27;
+    }
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0f0f0f;
-    color: white;
-}
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 2.5rem;
+      background: rgba(250,250,248,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.35rem;
+      color: var(--black);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--green); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.88rem; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--green); }
+    .nav-cta {
+      background: var(--green) !important;
+      color: #fff !important;
+      padding: 8px 20px !important;
+      border-radius: 999px !important;
+      font-weight: 500 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--green-dark) !important; }
 
-/* HEADER */
-header {
-    background: #00c896;
-    padding: 20px;
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-}
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, #d4f0e8 0%, transparent 65%),
+                  radial-gradient(ellipse 40% 40% at 85% 80%, #e8f7ef 0%, transparent 60%);
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-block;
+      background: var(--green-light);
+      color: var(--green-dark);
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 6px 18px; border-radius: 999px;
+      margin-bottom: 1.8rem;
+      border: 0.5px solid var(--green-mid);
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp 0.7s 0.1s forwards;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      font-weight: 400; line-height: 1.12;
+      max-width: 640px; margin: 0 auto 1.4rem;
+      opacity: 0; transform: translateY(20px);
+      animation: fadeUp 0.7s 0.25s forwards;
+    }
+    .hero h1 em { font-style: italic; color: var(--green); }
+    .hero-sub {
+      font-size: 1.05rem; color: var(--gray);
+      max-width: 440px; margin: 0 auto 2.4rem; line-height: 1.7;
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp 0.7s 0.4s forwards;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp 0.7s 0.55s forwards;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green); color: #fff;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500;
+      padding: 14px 30px; border-radius: 999px;
+      text-decoration: none; transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: transparent; color: var(--black);
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+      padding: 14px 24px; border-radius: 999px;
+      border: 0.5px solid var(--border); text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--green); background: var(--green-light); }
+    .hero-stats {
+      display: flex; gap: 2.5rem; flex-wrap: wrap; justify-content: center;
+      margin-top: 3.5rem;
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp 0.7s 0.7s forwards;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat strong { display: block; font-family: 'DM Serif Display', serif; font-size: 1.9rem; color: var(--black); }
+    .hero-stat span { font-size: 0.82rem; color: var(--gray); }
 
-/* HERO */
-.hero {
-    text-align: center;
-    padding: 100px 20px;
-    animation: fadeIn 1.5s ease;
-}
+    /* SECTION */
+    .divider { height: 0.5px; background: var(--border); margin: 0 2.5rem; }
+    section { padding: 5rem 2.5rem; }
+    .section-tag { display: inline-block; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); margin-bottom: 0.8rem; }
+    .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 400; line-height: 1.2; margin-bottom: 0.8rem; }
+    .section-sub { font-size: 1rem; color: var(--gray); max-width: 460px; line-height: 1.7; margin-bottom: 3rem; }
 
-.hero h1 {
-    font-size: 42px;
-}
+    /* FEATURES */
+    .features { background: var(--white); }
+    .features-inner, .process-inner, .reviews-inner, .pricing-inner { max-width: 1100px; margin: 0 auto; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
+    .feat-card {
+      background: var(--gray-light); border-radius: 16px; padding: 1.8rem 1.6rem;
+      border: 0.5px solid var(--border);
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .feat-card.visible { opacity: 1; transform: translateY(0); }
+    .feat-card:hover { border-color: var(--green-mid); }
+    .feat-icon { width: 44px; height: 44px; background: var(--green-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 1.1rem; }
+    .feat-card h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.5rem; }
+    .feat-card p { font-size: 0.9rem; color: var(--gray); line-height: 1.6; }
 
-.btn {
-    background: #00c896;
-    color: black;
-    padding: 15px 30px;
-    border-radius: 10px;
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 20px;
-    font-weight: bold;
-    transition: 0.3s;
-}
+    /* PROCESS */
+    .process { background: var(--gray-light); }
+    .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    .process-step {
+      padding: 2rem 1.5rem; border-right: 0.5px solid var(--border);
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .process-step:last-child { border-right: none; }
+    .process-step.visible { opacity: 1; transform: translateY(0); }
+    .step-num { font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--green-mid); line-height: 1; margin-bottom: 0.8rem; }
+    .process-step h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.4rem; }
+    .process-step p { font-size: 0.88rem; color: var(--gray); line-height: 1.6; }
 
-.btn:hover {
-    transform: scale(1.1);
-    background: #00e6a8;
-}
+    /* REVIEWS */
+    .reviews { background: var(--white); }
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; }
+    .review-card {
+      background: var(--gray-light); border-radius: 16px; padding: 1.6rem;
+      border: 0.5px solid var(--border);
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .review-card.visible { opacity: 1; transform: translateY(0); }
+    .stars { color: var(--amber); font-size: 14px; margin-bottom: 0.8rem; letter-spacing: 2px; }
+    .review-text { font-size: 0.9rem; color: var(--gray); line-height: 1.7; margin-bottom: 1.2rem; font-style: italic; }
+    .reviewer { display: flex; align-items: center; gap: 10px; }
+    .avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--green-light); color: var(--green-dark); font-size: 12px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .reviewer-name { font-size: 0.88rem; font-weight: 500; }
+    .reviewer-role { font-size: 0.78rem; color: var(--gray); }
 
-/* SERVICES */
-.services {
-    padding: 60px 20px;
-    text-align: center;
-}
+    /* PRICING */
+    .pricing { background: var(--gray-light); }
+    .pricing-inner { max-width: 1000px; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; }
+    .plan {
+      background: var(--white); border-radius: 16px; padding: 2rem 1.8rem;
+      border: 0.5px solid var(--border);
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .plan.visible { opacity: 1; transform: translateY(0); }
+    .plan.featured { border: 2px solid var(--green); }
+    .plan-badge { display: inline-block; background: var(--green-light); color: var(--green-dark); font-size: 0.72rem; font-weight: 500; padding: 4px 12px; border-radius: 999px; margin-bottom: 0.8rem; }
+    .plan-name { font-size: 0.82rem; color: var(--gray); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.4rem; }
+    .plan-price { font-family: 'DM Serif Display', serif; font-size: 2.4rem; font-weight: 400; margin-bottom: 0.2rem; }
+    .plan-price span { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--gray); }
+    .plan-desc { font-size: 0.85rem; color: var(--gray); margin: 0.6rem 0 1.4rem; line-height: 1.5; }
+    .plan hr { border: none; border-top: 0.5px solid var(--border); margin-bottom: 1.2rem; }
+    .plan ul { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.8rem; }
+    .plan ul li { font-size: 0.88rem; color: var(--gray); display: flex; align-items: center; gap: 8px; }
+    .plan ul li::before { content: '✓'; color: var(--green); font-weight: 500; }
+    .plan .btn-primary { width: 100%; justify-content: center; border-radius: 12px; }
 
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
+    /* CTA */
+    .cta-banner { background: var(--green); color: #fff; text-align: center; padding: 5rem 2.5rem; }
+    .cta-banner h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; margin-bottom: 1rem; }
+    .cta-banner p { font-size: 1rem; opacity: 0.85; margin-bottom: 2rem; max-width: 420px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+    .btn-white { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: var(--green-dark); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500; padding: 14px 32px; border-radius: 999px; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+    .btn-white:hover { background: var(--green-light); transform: translateY(-1px); }
 
-.card {
-    background: #1a1a1a;
-    padding: 20px;
-    width: 250px;
-    border-radius: 15px;
-    transition: 0.3s;
-}
+    /* FOOTER */
+    footer { background: var(--black); color: rgba(255,255,255,0.55); padding: 2.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.82rem; }
+    .footer-logo { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: #fff; text-decoration: none; }
+    .footer-logo span { color: var(--green-mid); }
+    footer a { color: rgba(255,255,255,0.55); text-decoration: none; }
+    footer a:hover { color: var(--green-mid); }
 
-.card:hover {
-    transform: translateY(-10px);
-}
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
-/* ANIMACIONES */
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(20px);}
-    to {opacity: 1; transform: translateY(0);}
-}
-
-/* WHATSAPP FLOAT */
-.whatsapp {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #25D366;
-    color: white;
-    padding: 15px;
-    border-radius: 50%;
-    font-size: 20px;
-    text-decoration: none;
-}
-</style>
-
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { display: none; }
+      section { padding: 3.5rem 1.2rem; }
+      .hero { padding: 7rem 1.2rem 4rem; }
+      .process-step { border-right: none; border-bottom: 0.5px solid var(--border); }
+      .process-step:last-child { border-bottom: none; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-🚀 Web Impulso
-</header>
+  <nav>
+    <a href="#inicio" class="nav-logo">Web <span>Impulso</span></a>
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#proceso">Cómo funciona</a></li>
+      <li><a href="#precios">Precios</a></li>
+      <li><a href="#contacto" class="nav-cta">Contactar</a></li>
+    </ul>
+  </nav>
 
-<section class="hero">
-    <h1>Haz crecer tu negocio con una web 🔥</h1>
-    <p>Diseño moderno + más clientes + más ventas</p>
-    <a href="https://wa.me/573172474553" class="btn">Contáctame</a>
-</section>
-
-<section class="services">
-    <h2>Servicios</h2>
-
-    <div class="cards">
-        <div class="card">
-            <h3>💻 Páginas Web</h3>
-            <p>Diseños rápidos y profesionales</p>
-        </div>
-
-        <div class="card">
-            <h3>🛒 Tiendas Online</h3>
-            <p>Empieza a vender en internet</p>
-        </div>
-
-        <div class="card">
-            <h3>🚀 SEO</h3>
-            <p>Aparece en Google y consigue clientes</p>
-        </div>
+  <section class="hero" id="inicio">
+    <div class="hero-bg"></div>
+    <div class="hero-badge">✦ Diseño web para negocios reales</div>
+    <h1>Tu negocio merece una web que <em>venda de verdad</em></h1>
+    <p class="hero-sub">Creamos páginas web rápidas, bonitas y optimizadas para pequeñas empresas y negocios emergentes. Sin complicaciones, sin costes ocultos.</p>
+    <div class="hero-actions">
+      <a href="mailto:webimpulse50@gmail.com?subject=Quiero%20mi%20web%20-%20Web%20Impulso&body=Hola%2C%20me%20interesa%20una%20p%C3%A1gina%20web%20para%20mi%20negocio.%20%C2%BFPod%C3%A9is%20darme%20m%C3%A1s%20informaci%C3%B3n%3F" class="btn-primary">
+        Quiero mi web ahora →
+      </a>
+      <a href="#precios" class="btn-secondary">Ver precios</a>
     </div>
-</section>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>+50</strong><span>webs entregadas</span></div>
+      <div class="hero-stat"><strong>7 días</strong><span>tiempo medio de entrega</span></div>
+      <div class="hero-stat"><strong>100%</strong><span>clientes satisfechos</span></div>
+    </div>
+  </section>
 
-<footer style="text-align:center; padding:20px;">
-© 2026 Web Impulso
-</footer>
+  <div class="divider"></div>
 
-<!-- BOTON WHATSAPP -->
-<a href="https://wa.me/573172474553" class="whatsapp">💬</a>
+  <section class="features" id="servicios">
+    <div class="features-inner">
+      <span class="section-tag">¿Por qué elegirnos?</span>
+      <h2 class="section-title">Todo lo que necesitas<br>para brillar online</h2>
+      <p class="section-sub">No vendemos plantillas genéricas. Cada web es única, creada para tu negocio y tus clientes.</p>
+      <div class="features-grid">
+        <div class="feat-card scroll-reveal">
+          <div class="feat-icon">⚡</div>
+          <h3>Velocidad extrema</h3>
+          <p>Carga en menos de 2 segundos. Google te premia con mejor posición y tus clientes no se van antes de ver tu oferta.</p>
+        </div>
+        <div class="feat-card scroll-reveal">
+          <div class="feat-icon">📱</div>
+          <h3>Perfecta en móvil</h3>
+          <p>El 75% de tus visitas vendrán del móvil. Tu web se verá impecable en cualquier pantalla, siempre.</p>
+        </div>
+        <div class="feat-card scroll-reveal">
+          <div class="feat-icon">🎨</div>
+          <h3>Diseño a tu imagen</h3>
+          <p>Tu marca, tus colores, tu personalidad. Diseñamos pensando en lo que hace único a tu negocio.</p>
+        </div>
+        <div class="feat-card scroll-reveal">
+          <div class="feat-icon">🚀</div>
+          <h3>Lista en 7 días</h3>
+          <p>Sin esperas interminables. Tu web publicada y funcionando en una semana desde el primer contacto.</p>
+        </div>
+        <div class="feat-card scroll-reveal">
+          <div class="feat-icon">🔍</div>
+          <h3>SEO incluido</h3>
+          <p>Optimizamos tu web para que Google te encuentre. Más visitas = más clientes potenciales para ti.</p>
+        </div>
+        <div class="feat-card scroll-reveal">
+          <div class="feat-icon">🛡️</div>
+          <h3>Soporte real</h3>
+          <p>No desaparecemos después de entregar. Estamos aquí para ayudarte con dudas y cambios.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="process" id="proceso">
+    <div class="process-inner">
+      <span class="section-tag">Cómo funciona</span>
+      <h2 class="section-title">De la idea a tu web<br>en 4 pasos sencillos</h2>
+      <p class="section-sub">Un proceso claro y sin sorpresas. Tú descansas, nosotros trabajamos.</p>
+      <div class="process-steps">
+        <div class="process-step scroll-reveal">
+          <div class="step-num">01</div>
+          <h3>Hablamos</h3>
+          <p>Cuéntanos tu negocio, tus clientes y tus objetivos. Una llamada de 20 minutos es suficiente.</p>
+        </div>
+        <div class="process-step scroll-reveal">
+          <div class="step-num">02</div>
+          <h3>Diseñamos</h3>
+          <p>Creamos el diseño personalizado de tu web. Lo ves antes de construirlo y das tu aprobación.</p>
+        </div>
+        <div class="process-step scroll-reveal">
+          <div class="step-num">03</div>
+          <h3>Desarrollamos</h3>
+          <p>Construimos tu web con código limpio, rápido y optimizado. Sin atajos, sin plantillas.</p>
+        </div>
+        <div class="process-step scroll-reveal">
+          <div class="step-num">04</div>
+          <h3>Lanzamos</h3>
+          <p>Publicamos tu web, te explicamos cómo funciona y te dejamos listo para recibir clientes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="reviews" id="resenas">
+    <div class="reviews-inner">
+      <span class="section-tag">Testimonios</span>
+      <h2 class="section-title">Negocios reales que ya<br>están creciendo online</h2>
+      <p class="section-sub">No lo decimos nosotros, lo dicen nuestros clientes.</p>
+      <div class="reviews-grid">
+        <div class="review-card scroll-reveal">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">"Desde que lancé mi web con Web Impulso, recibo el triple de consultas. Mis clientes siempre me dicen que parece muy profesional. Ha sido la mejor inversión del año."</p>
+          <div class="reviewer">
+            <div class="avatar">MC</div>
+            <div>
+              <div class="reviewer-name">María Castellano</div>
+              <div class="reviewer-role">Clínica de estética, Sevilla</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card scroll-reveal" style="transition-delay:0.1s">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">"Tenía miedo de que fuera complicado, pero todo fue facilísimo. En 7 días tenía mi web online y el primer mes ya conseguí 5 clientes nuevos gracias a ella."</p>
+          <div class="reviewer">
+            <div class="avatar">JR</div>
+            <div>
+              <div class="reviewer-name">Javier Romero</div>
+              <div class="reviewer-role">Carpintería a medida, Valencia</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card scroll-reveal" style="transition-delay:0.2s">
+          <div class="stars">★★★★</div>
+          <p class="review-text">"El precio es muy justo para la calidad que entregan. Rápidos, atentos y el resultado es precioso. Recomiendo Web Impulso a cualquier pequeño negocio sin dudarlo."</p>
+          <div class="reviewer">
+            <div class="avatar">LP</div>
+            <div>
+              <div class="reviewer-name">Laura Pérez</div>
+              <div class="reviewer-role">Boutique de moda, Madrid</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card scroll-reveal" style="transition-delay:0.3s">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">"Me sorprendió lo rápido que lo hicieron y lo bien que quedó. Ahora mi restaurante aparece en Google y cada semana llegan reservas nuevas directamente desde la web."</p>
+          <div class="reviewer">
+            <div class="avatar">AS</div>
+            <div>
+              <div class="reviewer-name">Antonio Sánchez</div>
+              <div class="reviewer-role">Restaurante, Málaga</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="pricing" id="precios">
+    <div class="pricing-inner">
+      <span class="section-tag">Precios</span>
+      <h2 class="section-title">Planes claros,<br>sin letra pequeña</h2>
+      <p class="section-sub">Pago único, sin cuotas mensuales sorpresa. Lo que ves es lo que pagas.</p>
+      <div class="pricing-grid">
+        <div class="plan scroll-reveal">
+          <div class="plan-name">Esencial</div>
+          <div class="plan-price">€149 <span>pago único</span></div>
+          <div class="plan-desc">Para negocios que dan sus primeros pasos online.</div>
+          <hr />
+          <ul>
+            <li>1 página completa</li>
+            <li>Diseño responsive móvil</li>
+            <li>Formulario de contacto</li>
+            <li>Entrega en 7 días</li>
+            <li>1 revisión incluida</li>
+          </ul>
+          <a href="mailto:webimpulse50@gmail.com?subject=Plan%20Esencial%20-%20Web%20Impulso" class="btn-primary">Empezar ahora →</a>
+        </div>
+        <div class="plan featured scroll-reveal" style="transition-delay:0.1s">
+          <div class="plan-badge">✦ Más popular</div>
+          <div class="plan-name">Negocio</div>
+          <div class="plan-price">€299 <span>pago único</span></div>
+          <div class="plan-desc">Para empresas que quieren destacar y recibir más clientes.</div>
+          <hr />
+          <ul>
+            <li>Hasta 5 secciones</li>
+            <li>SEO básico incluido</li>
+            <li>Galería de imágenes</li>
+            <li>Sección de reseñas</li>
+            <li>Mapa y horarios</li>
+            <li>Soporte 30 días</li>
+          </ul>
+          <a href="mailto:webimpulse50@gmail.com?subject=Plan%20Negocio%20-%20Web%20Impulso" class="btn-primary">Empezar ahora →</a>
+        </div>
+        <div class="plan scroll-reveal" style="transition-delay:0.2s">
+          <div class="plan-name">Premium</div>
+          <div class="plan-price">€499 <span>pago único</span></div>
+          <div class="plan-desc">Para quien quiere una presencia web de alto impacto.</div>
+          <hr />
+          <ul>
+            <li>Web completa multi-sección</li>
+            <li>Animaciones y efectos</li>
+            <li>Blog integrado</li>
+            <li>SEO avanzado</li>
+            <li>Integración redes sociales</li>
+            <li>Soporte 90 días</li>
+          </ul>
+          <a href="mailto:webimpulse50@gmail.com?subject=Plan%20Premium%20-%20Web%20Impulso" class="btn-primary">Empezar ahora →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner" id="contacto">
+    <h2>¿Listo para impulsar tu negocio?</h2>
+    <p>Escríbenos hoy y en menos de 24 horas te contamos cómo podemos ayudarte. Sin compromiso.</p>
+    <a href="mailto:webimpulse50@gmail.com?subject=Quiero%20mi%20web%20-%20Web%20Impulso&body=Hola%2C%20me%20interesa%20una%20p%C3%A1gina%20web%20para%20mi%20negocio.%20%C2%BFPod%C3%A9is%20contactarme%3F" class="btn-white">
+      Escribir por Gmail →
+    </a>
+  </section>
+
+  <footer>
+    <a href="#inicio" class="footer-logo">Web <span>Impulso</span></a>
+    <span>© 2025 Web Impulso · Diseño web para pequeñas empresas</span>
+    <a href="mailto:webimpulse50.com">webimpulse50@gmail.com
+</a>
+  </footer>
+
+  <script>
+    const revealEls = document.querySelectorAll('.scroll-reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
